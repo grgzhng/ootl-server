@@ -1,4 +1,4 @@
-const catagories = [
+const categories = [
   "politics",
   "sports",
   "society",
@@ -12,11 +12,7 @@ function parse_rollups(rollups, category) {
   let matching = [];
   rollups.forEach(rollup => {
     if (rollup.category.includes(category)) {
-      const topic = {
-        name: rollup.name,
-        article: rollup.top_articles_on_network[0]
-      };
-      matching.push(topic);
+      matching.push(rollup.top_articles_on_network[0]);
     }
   });
   return matching;
