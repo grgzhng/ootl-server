@@ -16,12 +16,10 @@ app.post("/lahacks", (req, res) => {
       .get(TABOOLA_API)
       .then(response => {
         // console.log(response.data.buckets[0].report.rollups[0]);
-        parser.parse_news(response.data.buckets[0], "politics");
-        res.send(
-          `<Response><Message>${
-            response.data.buckets[0].report.rollups[0].name
-          }</Message></Response>`
-        );
+        const news = parser.parse_news(response.data.buckets[0], "politics");
+        const plain_news = JSON.stringify(news[0]);
+        console.log(plain_news);
+        res.send(`<Response><Message>${plain_news}</Message></Response>`);
       })
       .catch(error => {
         console.log(error);

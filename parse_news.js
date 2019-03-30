@@ -23,7 +23,7 @@ function parse_rollups(rollups, category) {
 function parse_news(res, category) {
   // console.log(res);
   const news = parse_rollups(res.report.rollups, category);
-  console.log(news);
+  return news;
 
   // res.forEach(bucket => {
   //   const rollups = bucket.report.rollups;
