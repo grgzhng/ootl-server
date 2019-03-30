@@ -18,11 +18,22 @@ function parse_rollups(rollups, category) {
   return matching;
 }
 
+function JSON_to_text(obj) {
+  obj.forEach(element => {
+    for (key in element) {
+      if (element.hasOwnProperty(key)) {
+        console.log(key + " = " + element[key]);
+      }
+    }
+  });
+}
+
 // parameter: takes in json block of `response.data.buckets`
 // parse the various buckets
 function parse_news(res, category) {
   // console.log(res);
   const news = parse_rollups(res.report.rollups, category);
+  JSON_to_text(news);
   return news;
 
   // res.forEach(bucket => {
