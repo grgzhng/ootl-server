@@ -42,7 +42,7 @@ res.send(`<Response><Message>Hi, ${inbMsg.slice(4)}. I'm dad</Message></Response
       });
   } else {
     res.send(
-      "<Response><Message>Welcome to OutOfTheLoop! \n\nPlease select which category you are interested in: \n\n- Politics \n- Sports \n- Society \n- Business \n- Technology \n- Entertainment \n- All</Message></Response>"
+      "<Response><Message>Welcome to OutOfTheLoop! \n\nText back which category you are interested in: \n\n- \"Politics\" \n- \"Sports\" \n- \"Society\" \n- \"Business\" \n- \"Technology\" \n- \"Entertainment\" \n- \"All\"</Message></Response>"
     );
   }
 });
