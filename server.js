@@ -23,6 +23,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post("/lahacks", (req, res) => {
   console.log("Received: " + req.body.Body);
   let inbMsg = req.body.Body.toLowerCase().trim();
+  var stt= inbMsg.slice(0,3);
+  console.log(stt);
+  if (stt == "i'm"){
+res.send(`<Response><Message>Hi, ${inbMsg.slice(4)}. I'm dad</Message></Response>`);
+      }
   if (categories.includes(inbMsg)) {
     axios
       .get(TABOOLA_API)
@@ -41,4 +46,5 @@ app.post("/lahacks", (req, res) => {
     );
   }
 });
+
 app.listen(8080, () => console.log("listening"));
