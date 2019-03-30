@@ -37,7 +37,7 @@ app.post("/lahacks", (req, res) => {
       });
   } else {
     res.send(
-      "<Response><Message>Welcome to OutOfTheLoop! \n\nPlease select which category you are interested in: \n\n- Politics \n- Sports \n- Society \n- Business \n- Technology \n- Entertainment \n- All</Message></Response>"
+      "<Response><Message>Welcome to OutOfTheLoop! \n\nText back which category you are interested in: \n\n- \"Politics\" \n- \"Sports\" \n- \"Society\" \n- \"Business\" \n- \"Technology\" \n- \"Entertainment\" \n- \"All\"</Message></Response>"
     );
   }
 });
