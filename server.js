@@ -8,25 +8,36 @@ const TABOOLA_API =
 
 const app = express();
 
+const categories = [
+  "all",
+  "politics",
+  "sports",
+  "society",
+  "business",
+  "technology",
+  "entertainment"
+];
+
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.post("/lahacks", (req, res) => {
+  console.log("Received: " + req.body.Body);
   let inbMsg = req.body.Body.toLowerCase().trim();
-  if (inbMsg == "ootl") {
+  if (categories.includes(inbMsg)) {
     axios
       .get(TABOOLA_API)
       .then(response => {
         // console.log(response.data.buckets[0].report.rollups[0]);
-        const news = parser.parse_news(response.data.buckets[0], "politics");
-        const plain_news = JSON.stringify(news[0]);
-        console.log(plain_news);
-        res.send(`<Response><Message>${plain_news}</Message></Response>`);
+        const news = parser.parse_news(response.data.buckets[0], inbMsg);
+        console.log(news);
+        res.send(`<Response><Message>${news}</Message></Response>`);
       })
       .catch(error => {
         console.log(error);
       });
   } else {
     res.send(
-      '<Response><Message>invalid response: text "ootl" to recieve today\'s news!</Message></Response>'
+      "<Response><Message>Welcome to OutOfTheLoop! \n\nPlease select which category you are interested in: \n\n- Politics \n- Sports \n- Society \n- Business \n- Technology \n- Entertainment \n- All</Message></Response>"
     );
   }
 });
