@@ -4,7 +4,7 @@ const axios = require("axios");
 const parser = require("./parse_news");
 
 const TABOOLA_API =
-  "https://us-central1-vision-migration.cloudfunctions.net/la_hacks_2019?market_code=0";
+  "https://us-central1-vision-migration.cloudfunctions.net/la_hacks_2019?market_code=1";
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.post("/lahacks", (req, res) => {
       .get(TABOOLA_API)
       .then(response => {
         // console.log(response.data.buckets[0].report.rollups[0]);
-        parser.parse_news(response.data.buckets[0].report.rollups[0]);
+        parser.parse_news(response.data.buckets[0], "politics");
         res.send(
           `<Response><Message>${
             response.data.buckets[0].report.rollups[0].name
