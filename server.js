@@ -68,9 +68,9 @@ app.post("/lahacks", async (req, res) => {
       .catch(error => {
         console.log(error);
       });
-  } else if (stt == "i'm" || stt == 'im' || stt == 'i am') {
+  } else if (stt == "i'm" || stt == 'im ' || stt == 'i a') {
     res.send(
-      `<Response><Message>Hi, ${inbMsg.slice(4)}. I'm dad</Message></Response>`
+      `<Response><Message>Hi,${inbMsg.slice(3)}. I'm dad</Message></Response>`
     );
   } else {
     res.send(
