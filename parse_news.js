@@ -43,7 +43,7 @@ async function format_json(json) {
     let { title, link } = article;
     const bitlyShortener = await shortener.shortenURL(link);
     const shortLink = bitlyShortener.data.data.url;
-    str = str + "\"" + title + "\"\n" + shortLink + "\n" + "\n";
+    str = str + '"' + title + '"\n' + shortLink + "\n" + "\n";
   }
   return str;
 }
@@ -51,19 +51,32 @@ async function format_json(json) {
 // parameter: takes in json block of `response.data.buckets`
 // parse the various buckets
 async function parse_news(res, category, amount) {
-  // console.log(res);
   const news = parse_rollups(res.report.rollups, category);
   // maximum of 5 articles shown
   const news_articles = get_articles(news).slice(0, amount);
   const news_text = await format_json(news_articles);
   return news_text;
+}
 
-  // res.forEach(bucket => {
-  //   const rollups = bucket.report.rollups;
-  //   const
-  // });
+async function parse_buckets(buckets, category, amount) {
+  let articles = [];
+  for (const bucket of buckets) {
+    if (articles.length > 0) break;
+    const news = parse_rollups(bucket.report.rollups, category);
+    const news_articles = get_articles(news);
+    // strip out duplicates between different buckets
+    for (const news_article of news_articles) {
+      if (!articles.some(a => a.link === news_article.link)) {
+        articles.push(news_article);
+      }
+    }
+  }
+  const news_text = await format_json(articles.slice(0, amount));
+  console.log(news_text);
+  return news_text;
 }
 
 module.exports = {
-  parse_news: parse_news
+  parse_news: parse_news,
+  parse_buckets: parse_buckets
 };

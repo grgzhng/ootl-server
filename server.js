@@ -30,12 +30,18 @@ app.post("/lahacks", async (req, res) => {
       .get(TABOOLA_API)
       .then(async response => {
         // console.log(response.data.buckets[0].report.rollups[0]);
-        const news = await parser.parse_news(
-          response.data.buckets[0],
+        const news = await parser.parse_buckets(
+          response.data.buckets,
           inbMsg,
           5
         );
-        res.send(`<Response><Message>${news}</Message></Response>`);
+        if (news == "") {
+          res.send(
+            `<Response><Message>No trending articles for ${inbMsg} in last 24 hours.</Message></Response>`
+          );
+        } else {
+          res.send(`<Response><Message>${news}</Message></Response>`);
+        }
       })
       .catch(error => {
         console.log(error);
@@ -44,13 +50,19 @@ app.post("/lahacks", async (req, res) => {
     axios
       .get(TABOOLA_API)
       .then(async response => {
-        const toptopic = utils.capital_letter(response.data.buckets[0].report.rollups[0].name);
-        const news = await parser.parse_news(response.data.buckets[0], "all", 1);
+        const toptopic = utils.capital_letter(
+          response.data.buckets[0].report.rollups[0].name
+        );
+        const news = await parser.parse_news(
+          response.data.buckets[0],
+          "all",
+          1
+        );
         res.send(
-          "<Response><Message>Welcome to OutOfTheLoop!\n" + 
-          `\nTop trending topic: ${toptopic}\n\nTop trending article:\n${news}` +
-          "Text back a catagory to explore more:" + 
-          "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
+          "<Response><Message>Welcome to OutOfTheLoop!\n" +
+            `\nTop trending topic: ${toptopic}\n\nTop trending article:\n${news}` +
+            "Text back a catagory to explore more:" +
+            "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
         );
       })
       .catch(error => {
