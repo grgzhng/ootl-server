@@ -1,16 +1,32 @@
-Made for 2019 LAHacks
+## Out Of The Loop
 
-Server for "Out of the Loop" text messaging
+LA Hacks 2019 Project by Andrew Young, George Zhang, Justin Jeon, and Sanskar Gyawali
 
-What it does:
-The purpose of this application is to present users with trending 
-articles and topics to keep users that are "out of the loop" up to date 
-with current events. Users text "ootl" to the given phone number and receive 
-the top trending article and topic as well as a list of other topics. Texting one of these categories then give a list of 5 recently top trending articles they can learn about and explore. This simple interface brings hot topics straight to the user.
+An application powered by an Express server that utilizes the Taboola Topics API and Twilio SMS API to bring you a concise look at the most trending news in the nation. Simply text the number and receive articles for categories you are interested in.
 
-How it works:
-This application runs on a port is made public to the internet. Then this public url is linked to the Twilio API so that the application can respond to text messages. After the user texts to server with an appropriate prompt, the application requests recently trending articles from the Taboola API. The data from Taboola is then sorted, formatted and texted back to the users so that they can explore these articles.
+### Demo
 
+### Technologies Used
+
+Below is a non-exhaustive list of some of the technologies used in OOTL and the reasoning why these technologies were chosen.
+
+- [Taboola Topics API](https://bit.ly/2O2N5Mh) provides information about what kind of news is trending in the last 24 hours.
+- [Twilio SMS API](https://www.twilio.com/sms/api) allows receiving and sending text messages to and from clients.
+- [Bitly API](https://dev.bitly.com/api.html) gave us the ability to shorten URLS when sending article links back to users.
+- [Node](https://nodejs.org/en/) almost needs no introduction. A JavaScript runtime for servers.
+- [Express](https://expressjs.com) is the most popular web framework for Node.
+- [Axios](https://github.com/axios/axios) is a promise based HTTP client we used in Node.
+
+
+### Local Development
+
+1. Clone the GitHub repository
+2. Run `npm install` to install dependencies
+3. Create a `.env` file to store Bit.ly API token
+4. Register phone number with Twilio
+5. Use [ngrok](https://ngrok.com/) to create URL that points to local port
+6. Point Twilio phone number's SMS web hook to ngrok URL
+7. Run `npm start` to start the server on Node!
 
 ### Description of files:
 * **server.js**: Main Express server that communicates with Twilio API and calls Taboola API
