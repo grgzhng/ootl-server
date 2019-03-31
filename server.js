@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
 const parser = require("./parse_news");
+const utils = require("./utils");
 
 const TABOOLA_API =
   "https://us-central1-vision-migration.cloudfunctions.net/la_hacks_2019?market_code=0";
@@ -43,17 +44,13 @@ app.post("/lahacks", async (req, res) => {
     axios
       .get(TABOOLA_API)
       .then(async response => {
-        const toptopic = response.data.buckets[0].report.rollups[0].name;
-        const news = await parser.parse_news(
-          response.data.buckets[0],
-          "all",
-          1
-        );
+        const toptopic = utils.capital_letter(response.data.buckets[0].report.rollups[0].name);
+        const news = await parser.parse_news(response.data.buckets[0], "all", 1);
         res.send(
-          "<Response><Message>Welcome to OutOfTheLoop!\n" +
-            `\nTop trending topic: ${toptopic}\nTop trending article:\n${news}` +
-            "Text back a category to explore more:" +
-            "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
+          "<Response><Message>Welcome to OutOfTheLoop!\n" + 
+          `\nTop trending topic: ${toptopic}\n\nTop trending article:\n${news}` +
+          "Text back a catagory to explore more:" + 
+          "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
         );
       })
       .catch(error => {
