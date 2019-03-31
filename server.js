@@ -20,16 +20,16 @@ const categories = [
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post("/lahacks", (req, res) => {
+app.post("/lahacks", async (req, res) => {
   console.log("Received: " + req.body.Body);
   let inbMsg = req.body.Body.toLowerCase().trim();
   var stt= inbMsg.slice(0,3);
   if (categories.includes(inbMsg)) {
     axios
       .get(TABOOLA_API)
-      .then(response => {
+      .then(async response => {
         // console.log(response.data.buckets[0].report.rollups[0]);
-        const news = parser.parse_news(response.data.buckets[0], inbMsg);
+        const news = await parser.parse_news(response.data.buckets[0], inbMsg);
         console.log(news);
         res.send(`<Response><Message>${news}</Message></Response>`);
       })

@@ -1,3 +1,5 @@
+const shortener = require("./bitly");
+
 // returns rollups that match the catagory
 function parse_rollups(rollups, category) {
   let matching = [];
@@ -35,23 +37,25 @@ function get_articles(obj) {
 }
 
 // takes in array of json objects with fields "title" and "link"
-function format_json(json) {
+async function format_json(json) {
   let str = "";
-  json.forEach(article => {
+  for (const article of json) {
     let { title, link } = article;
-    str = str + title + "\n" + link + "\n" + "\n";
-  });
+    const bitlyShortener = await shortener.shortenURL(link);
+    const shortLink = bitlyShortener.data.data.url;
+    str = str + title + "\n" + shortLink + "\n" + "\n";
+  }
   return str;
 }
 
 // parameter: takes in json block of `response.data.buckets`
 // parse the various buckets
-function parse_news(res, category) {
+async function parse_news(res, category) {
   // console.log(res);
   const news = parse_rollups(res.report.rollups, category);
   // maximum of 5 articles shown
   const news_articles = get_articles(news).slice(0, 5);
-  const news_text = format_json(news_articles);
+  const news_text = await format_json(news_articles);
   return news_text;
 
   // res.forEach(bucket => {
