@@ -45,7 +45,8 @@ app.post("/lahacks", (req, res) => {
   } else {
     res.send(
       "<Response><Message>Invalid category \n\nPlease text back which category you are interested in:\nPolitics\nSports\nSociety\nBusiness\nTechnology\nEntertainment\nAll</Message></Response>"
-  );
+    );
+  }
 });
 
 app.listen(8080, () => console.log("listening"));
