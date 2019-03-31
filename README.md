@@ -1,12 +1,12 @@
-## Out Of The Loop
+# Out Of The Loop
 
 LA Hacks 2019 Project by Andrew Young, George Zhang, Justin Jeon, and Sanskar Gyawali
 
 An application powered by an Express server that utilizes the Taboola Topics API and Twilio SMS API to bring you a concise look at the most trending news in the nation. Simply text the number and receive articles for categories you are interested in.
 
-### Demo
+## Demo
 
-### Technologies Used
+## Technologies Used
 
 Below is a non-exhaustive list of some of the technologies used in OOTL and the reasoning why these technologies were chosen.
 
@@ -17,7 +17,7 @@ Below is a non-exhaustive list of some of the technologies used in OOTL and the 
 - [Express](https://expressjs.com) is the most popular web framework for Node.
 - [Axios](https://github.com/axios/axios) is a promise based HTTP client we used in Node.
 
-### Local Development
+## Local Development
 
 1. Clone the GitHub repository
 2. Run `npm install` to install dependencies
@@ -27,7 +27,7 @@ Below is a non-exhaustive list of some of the technologies used in OOTL and the 
 6. Point Twilio phone number's SMS web hook to ngrok URL
 7. Run `npm start` to start the server on Node!
 
-### Description of files:
+## Description of files:
 
 - **server.js**: Main Express server that communicates with Twilio API and calls Taboola API
 - **parse_news.js**: Parses the object returned from the Taboola API, extracting news articles that match the user's requested topic.
