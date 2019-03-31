@@ -80,4 +80,4 @@ app.post("/lahacks", async (req, res) => {
   }
 });
 
-app.listen(8080, () => console.log("listening"));
+app.listen(process.env.PORT || 8080, () => console.log("listening"));
