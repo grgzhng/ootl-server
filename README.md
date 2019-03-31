@@ -17,7 +17,6 @@ Below is a non-exhaustive list of some of the technologies used in OOTL and the 
 - [Express](https://expressjs.com) is the most popular web framework for Node.
 - [Axios](https://github.com/axios/axios) is a promise based HTTP client we used in Node.
 
-
 ### Local Development
 
 1. Clone the GitHub repository
@@ -29,6 +28,7 @@ Below is a non-exhaustive list of some of the technologies used in OOTL and the 
 7. Run `npm start` to start the server on Node!
 
 ### Description of files:
-* **server.js**: Main Express server that communicates with Twilio API and calls Taboola API
-* **parse_news.js**: Parses the object returned from the Taboola API, extracting news articles that match the user's requested topic.
-* **bitly.js**: Shortens news articles links using Bit.ly API
+
+- **server.js**: Main Express server that communicates with Twilio API and calls Taboola API
+- **parse_news.js**: Parses the object returned from the Taboola API, extracting news articles that match the user's requested topic.
+- **bitly.js**: Shortens news articles links using Bit.ly API
