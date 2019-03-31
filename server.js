@@ -42,8 +42,8 @@ app.post("/lahacks", async (req, res) => {
         const toptopic = response.data.buckets[0].report.rollups[0].name;
         const news = await parser.parse_news(response.data.buckets[0], "all", 1);
         res.send(
-          `<Response><Message>Welcome to OutOfTheLoop!\n` + 
-          "\nTop trending topic: ${toptopic}\nTop trending article:\n${news}` +
+          "<Response><Message>Welcome to OutOfTheLoop!\n" + 
+          `\nTop trending topic: ${toptopic}\nTop trending article:\n${news}` +
           "Text back a catagory to explore more:" + 
           "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
         );
