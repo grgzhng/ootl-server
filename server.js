@@ -61,14 +61,14 @@ app.post("/lahacks", async (req, res) => {
         res.send(
           "<Response><Message>Welcome to OutOfTheLoop!\n" +
             `\nTop trending topic: ${toptopic}\n\nTop trending article:\n${news}` +
-            "Text back a catagory to explore more:" +
+            "Text back a category to explore more:" +
             "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
         );
       })
       .catch(error => {
         console.log(error);
       });
-  } else if (stt == "i'm" || stt == 'im ' || stt == 'i a') {
+  } else if (stt == "i'm" || stt == "im " || stt == "i a") {
     res.send(
       `<Response><Message>Hi,${inbMsg.slice(3)}. I'm dad</Message></Response>`
     );
