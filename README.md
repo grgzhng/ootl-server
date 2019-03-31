@@ -4,7 +4,9 @@ LA Hacks 2019 Project by Andrew Young, George Zhang, Justin Jeon, and Sanskar Gy
 
 An application powered by an Express server that utilizes the Taboola Topics API and Twilio SMS API to bring you a concise look at the most trending news in the nation. Simply text the number and receive articles for categories you are interested in.
 
-## Demo
+## Demo 
+
+![](https://media.giphy.com/media/65QZuMABe8I0K6KWKr/giphy.gif) .      ![](https://media.giphy.com/media/LpWvDv9PRhSy52ipbF/giphy.gif)
 
 ## Technologies Used
 
