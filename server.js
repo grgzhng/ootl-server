@@ -36,15 +36,18 @@ app.post("/lahacks", async (req, res) => {
       .catch(error => {
         console.log(error);
       });
-  } else if (stt == "i'm") {
-    res.send(`<Response><Message>Hi, ${inbMsg.slice(4)}. I'm dad</Message></Response>`);
   } else if (inbMsg == "ootl") {
     res.send(
-      "<Response><Message>Welcome to OutOfTheLoop! \n\nPlease text back which category you are interested in:\nPolitics\nSports\nSociety\nBusiness\nTechnology\nEntertainment\nAll</Message></Response>"
+      `<Response><Message>Welcome to OutOfTheLoop!\nTop trending article:${news}` +
+      "\n\nText back a catagory to explore more:" + 
+      "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
     );
+  } else if (stt == "i'm") {
+    res.send(`<Response><Message>Hi, ${inbMsg.slice(4)}. I'm dad</Message></Response>`);
   } else {
     res.send(
-      "<Response><Message>Invalid category \n\nPlease text back which category you are interested in:\nPolitics\nSports\nSociety\nBusiness\nTechnology\nEntertainment\nAll</Message></Response>"
+      "<Response><Message>Invalid category\n\nEither text \"ootl\" or a catagory:" + 
+      "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
     );
   }
 });
