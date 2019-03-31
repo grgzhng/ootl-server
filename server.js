@@ -24,10 +24,6 @@ app.post("/lahacks", (req, res) => {
   console.log("Received: " + req.body.Body);
   let inbMsg = req.body.Body.toLowerCase().trim();
   var stt= inbMsg.slice(0,3);
-  console.log(stt);
-  if (stt == "i'm"){
-res.send(`<Response><Message>Hi, ${inbMsg.slice(4)}. I'm dad</Message></Response>`);
-      }
   if (categories.includes(inbMsg)) {
     axios
       .get(TABOOLA_API)
@@ -40,11 +36,16 @@ res.send(`<Response><Message>Hi, ${inbMsg.slice(4)}. I'm dad</Message></Response
       .catch(error => {
         console.log(error);
       });
+  } else if (stt == "i'm") {
+    res.send(`<Response><Message>Hi, ${inbMsg.slice(4)}. I'm dad</Message></Response>`);
+  } else if (inbMsg == "ootl") {
+    res.send(
+      "<Response><Message>Welcome to OutOfTheLoop! \n\nPlease text back which category you are interested in:\nPolitics\nSports\nSociety\nBusiness\nTechnology\nEntertainment\nAll</Message></Response>"
+    );
   } else {
     res.send(
-      "<Response><Message>Welcome to OutOfTheLoop! \n\nText back which category you are interested in: \n\n- \"Politics\" \n- \"Sports\" \n- \"Society\" \n- \"Business\" \n- \"Technology\" \n- \"Entertainment\" \n- \"All\"</Message></Response>"
-    );
-  }
+      "<Response><Message>Invalid category \n\nPlease text back which category you are interested in:\nPolitics\nSports\nSociety\nBusiness\nTechnology\nEntertainment\nAll</Message></Response>"
+  );
 });
 
 app.listen(8080, () => console.log("listening"));
