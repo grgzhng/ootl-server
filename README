@@ -3,7 +3,16 @@ Made for 2019 LAHacks
 Server for "Out of the Loop" text messaging
 
 What it does:
-The purpose of this application is to present users with trending articles and topics to keep users that are "out of the loop" up to date with current events. Users text "ootl" to the given phone number and receive the top trending article and topic as well as a list of other topics. Texting one of these categories then give a list of 5 recently top trending articles they can learn about and explore. This simple interface brings hot topics straight to the user.
+The purpose of this application is to present users with trending 
+articles and topics to keep users that are "out of the loop" up to date 
+with current events. Users text "ootl" to the given phone number and receive 
+the top trending article and topic as well as a list of other topics. Texting one of these categories then give a list of 5 recently top trending articles they can learn about and explore. This simple interface brings hot topics straight to the user.
 
 How it works:
 This application runs on a port is made public to the internet. Then this public url is linked to the Twilio API so that the application can respond to text messages. After the user texts to server with an appropriate prompt, the application requests recently trending articles from the Taboola API. The data from Taboola is then sorted, formatted and texted back to the users so that they can explore these articles.
+
+
+### Description of files:
+* **server.js**: Main Express server that communicates with Twilio API and calls Taboola API
+* **parse_news.js**: Parses the object returned from the Taboola API, extracting news articles that match the user's requested topic.
+* **bitly.js**: Shortens news articles links using Bit.ly API
