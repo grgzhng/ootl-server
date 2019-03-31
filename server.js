@@ -29,19 +29,27 @@ app.post("/lahacks", async (req, res) => {
       .get(TABOOLA_API)
       .then(async response => {
         // console.log(response.data.buckets[0].report.rollups[0]);
-        const news = await parser.parse_news(response.data.buckets[0], inbMsg);
-        console.log(news);
+        const news = await parser.parse_news(response.data.buckets[0], inbMsg, 5);
         res.send(`<Response><Message>${news}</Message></Response>`);
       })
       .catch(error => {
         console.log(error);
       });
   } else if (inbMsg == "ootl") {
-    res.send(
-      `<Response><Message>Welcome to OutOfTheLoop!\nTop trending article:${news}` +
-      "\n\nText back a catagory to explore more:" + 
-      "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
-    );
+    axios
+      .get(TABOOLA_API)
+      .then(async response => {
+        const toptopic = "yes"
+        const news = await parser.parse_news(response.data.buckets[0], "all", 1);
+        res.send(
+          `<Response><Message>Welcome to OutOfTheLoop!\n\nTop trending topic: ${toptopic}\n\nTop trending article:\n${news}` +
+          "Text back a catagory to explore more:" + 
+          "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
   } else if (stt == "i'm") {
     res.send(`<Response><Message>Hi, ${inbMsg.slice(4)}. I'm dad</Message></Response>`);
   } else {

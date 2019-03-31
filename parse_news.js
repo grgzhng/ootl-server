@@ -43,18 +43,18 @@ async function format_json(json) {
     let { title, link } = article;
     const bitlyShortener = await shortener.shortenURL(link);
     const shortLink = bitlyShortener.data.data.url;
-    str = str + title + "\n" + shortLink + "\n" + "\n";
+    str = str + "\"" + title + "\"\n" + shortLink + "\n" + "\n";
   }
   return str;
 }
 
 // parameter: takes in json block of `response.data.buckets`
 // parse the various buckets
-async function parse_news(res, category) {
+async function parse_news(res, category, amount) {
   // console.log(res);
   const news = parse_rollups(res.report.rollups, category);
   // maximum of 5 articles shown
-  const news_articles = get_articles(news).slice(0, 5);
+  const news_articles = get_articles(news).slice(0, amount);
   const news_text = await format_json(news_articles);
   return news_text;
 
