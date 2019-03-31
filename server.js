@@ -23,13 +23,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post("/lahacks", async (req, res) => {
   console.log("Received: " + req.body.Body);
   let inbMsg = req.body.Body.toLowerCase().trim();
-  var stt= inbMsg.slice(0,3);
+  var stt = inbMsg.slice(0, 3);
   if (categories.includes(inbMsg)) {
     axios
       .get(TABOOLA_API)
       .then(async response => {
         // console.log(response.data.buckets[0].report.rollups[0]);
-        const news = await parser.parse_news(response.data.buckets[0], inbMsg, 5);
+        const news = await parser.parse_news(
+          response.data.buckets[0],
+          inbMsg,
+          5
+        );
         res.send(`<Response><Message>${news}</Message></Response>`);
       })
       .catch(error => {
@@ -40,23 +44,29 @@ app.post("/lahacks", async (req, res) => {
       .get(TABOOLA_API)
       .then(async response => {
         const toptopic = response.data.buckets[0].report.rollups[0].name;
-        const news = await parser.parse_news(response.data.buckets[0], "all", 1);
+        const news = await parser.parse_news(
+          response.data.buckets[0],
+          "all",
+          1
+        );
         res.send(
-          "<Response><Message>Welcome to OutOfTheLoop!\n" + 
-          `\nTop trending topic: ${toptopic}\nTop trending article:\n${news}` +
-          "Text back a catagory to explore more:" + 
-          "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
+          "<Response><Message>Welcome to OutOfTheLoop!\n" +
+            `\nTop trending topic: ${toptopic}\nTop trending article:\n${news}` +
+            "Text back a category to explore more:" +
+            "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
         );
       })
       .catch(error => {
         console.log(error);
       });
   } else if (stt == "i'm") {
-    res.send(`<Response><Message>Hi, ${inbMsg.slice(4)}. I'm dad</Message></Response>`);
+    res.send(
+      `<Response><Message>Hi, ${inbMsg.slice(4)}. I'm dad</Message></Response>`
+    );
   } else {
     res.send(
-      "<Response><Message>Invalid category\n\nEither text \"ootl\" or a catagory:" + 
-      "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
+      '<Response><Message>Invalid category\n\nEither text "ootl" or a category:' +
+        "\n- Politics\n- Sports\n- Society\n- Business\n- Technology\n- Entertainment\n- All</Message></Response>"
     );
   }
 });
