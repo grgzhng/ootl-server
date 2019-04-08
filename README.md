@@ -8,7 +8,7 @@ An application powered by an Express server that utilizes the Taboola Topics API
 
 ![](https://media.giphy.com/media/65QZuMABe8I0K6KWKr/giphy.gif) ![](https://media.giphy.com/media/LpWvDv9PRhSy52ipbF/giphy.gif)
 
-Feel free to try it out yourself by texting "OOTL" to +1 858 239 0343!
+Feel free to try it out yourself by texting "OOTL" to +1 858 239 0343! (update 4/7/19: API endpoints are no longer active)
 
 ## Technologies Used
 
